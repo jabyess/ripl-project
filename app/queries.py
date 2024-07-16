@@ -51,3 +51,4 @@ def get_state_summary(db: Session):
 
 def get_state_detail(state_abbr: StateAbbr, db: Session):
     return db.query(BLSData).filter(state_abbr == BLSData.PRIM_STATE, BLSData.OCC_TITLE == "All Occupations").all()
+
