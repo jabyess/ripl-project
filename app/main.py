@@ -1,5 +1,6 @@
 from typing import Annotated
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from functools import lru_cache
 from sqlalchemy.orm import Session
 from .database import SessionLocal, engine
@@ -8,6 +9,16 @@ from . import config, queries, models, schemas
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+origins = ["http://localhost:5173"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @lru_cache
 def get_settings():
