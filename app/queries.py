@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session, aliased
 from sqlalchemy import func, and_
-from .models import BLSData, State
+from .models import BLSData 
+from .schemas import StateAbbr
 
 
 def get_state_summary(db: Session):
@@ -48,6 +49,5 @@ def get_state_summary(db: Session):
     # )
 
 
-
-def get_state_detail(state, db: Session):
-    return db.query(State).filter(state == State.state_name).all()
+def get_state_detail(state_abbr: StateAbbr, db: Session):
+    return db.query(BLSData).filter(state_abbr == BLSData.PRIM_STATE, BLSData.OCC_TITLE == "All Occupations").all()

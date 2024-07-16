@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class AllDataBase(BaseModel):
     id: int
@@ -45,6 +45,9 @@ class StateSummary(BaseModel):
     OCC_TITLE: str
     PRIM_STATE: str
 
+
+class StateAbbr(BaseModel):
+    state_abbr: str = Field(max_length=2, min_length=2, examples=["NY"])
 
 class StateDetail(BaseModel):
     AREA_TITLE: str

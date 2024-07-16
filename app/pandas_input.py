@@ -86,14 +86,7 @@ df = df.loc[:, cols_to_keep]
 
 cleaned = df.ffill()
 
-
-# test_df = pd.DataFrame([["VA", "test"], ["NY", "test"], ["MD", "test"]], columns=["state_name", "test"])
-test_df = pd.DataFrame([["VA"], ["NY"], ["MD"]], columns=["state_name"])
-
-# test_df = test_df.loc[:, "state_name"]
-
-# print(test_df)
-
+# test_df = pd.DataFrame([["VA"], ["NY"], ["MD"]], columns=["state_name"])
 
 with engine.connect() as connection:
     cleaned.to_sql(
@@ -104,4 +97,4 @@ with engine.connect() as connection:
         dtype=bls_dtypes,
     )
 
-    test_df.to_sql("states", index_label="id", con=connection, if_exists="replace")
+    # test_df.to_sql("states", index_label="id", con=connection, if_exists="replace")
