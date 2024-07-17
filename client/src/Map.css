@@ -1,0 +1,37 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+}
+
+.map-container {
+  display: flex;
+}
+.detail {
+  border: 1px solid #2c2c2c;
+  width: 300px;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 1px 1px;
+}
+
+table {
+  table-layout: fixed;
+}
+
+table td {
+  padding: 1px 5px;
+}
+
+table td:first-child {
+  text-align: right;
+  font-weight: bold;
+}
+
+table td:last-child {
+  text-align: left;
+}

@@ -1,19 +1,34 @@
+# RIPL Project
 
+My idea was to build a way to better visualize the provided BLS salary data. We're able to view the highest paying job in each state, visible on the tooltip. By clicking on a state we can see some detailed salary stats for that state.
 
 ## Pre-requisites
 - `npm` 
 - `pipenv`
-- python 3.10 or newer
-- node 20 or newer
+- postgresql 14
+- python >= 3.10
+- node >= 20 or newer
 
 ## Setup 
-
 - Clone this repository
-- run `pipenv install`
 
+**Backend Setup**
+
+- `cd` into this repo and run `pipenv install` 
+- Copy the `.env.sample` file into a file called `.env`. Replace the values with ones that work on your system, especially the database name, user, and password.
+- Run `pipenv shell` to activate the virtual environment
+- Run `python3 app/pandas_input.py` to populate the database 
+- Run `fastapi dev app/main.py` to launch the backend, which runs on http://localhost:8000
+- View the interactive API docs at http://localhost:8000/docs
+
+**Frontend Setup**
+
+- `cd` into `client` and run `npm install`
+- Run `npx vite dev` to launch the frontend.
+- Frontend should run on http://localhost:5173
 
 
 ## Todo
-- Clean the data in a more realistic way, so i don't end up with duplicate salaries per job title per state
-- Add a way to click on each state and show more data (maybe requires a new endpoint)
-- 
+- Clean the data in a more realistic way, so we don't end up with duplicate salaries per job title per state
+- Think about what other data could be shown on map, in detail or overview
+- Add close button for detail view

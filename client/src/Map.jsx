@@ -1,15 +1,18 @@
-import Highcharts from 'highcharts'
+import Highcharts, { format } from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import highchartsmap from 'highcharts/modules/map'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import Detail from './Detail'
 import { transformStateData } from '../utils/utils'
+import { formatNum } from '../utils/utils'
+import './Map.css'
 
 const Map = () => {
     const [mapData, setMapData] = useState({})
     const [seriesData, setSeriesData] = useState([])
+    const [stateDetail, setStateDetail] = useState([])
     let mapOptions = {}
-    let chartMin, chartMax
 
     highchartsmap(Highcharts)
 
@@ -26,8 +29,14 @@ const Map = () => {
 
         fetchGeoJson()
         fetchStateData()
-        console.log(chartMin, chartMax)
     }, [])
+
+    const fetchStateDetail = async (state) => {
+        const results = await axios.get(`http://localhost:8000/api/state/${state}`)
+        setStateDetail(results.data)
+
+        return results.data
+    }
 
     mapOptions = {
         title: {
@@ -41,7 +50,7 @@ const Map = () => {
             type: "map",
             map: mapData,
             width: 1024,
-            height: 1024,
+            height: 900,
             border: "#000"
 
         },
@@ -52,40 +61,60 @@ const Map = () => {
         credits: {
             enabled: false
         },
+
         colorAxis: {
             min: 198000,
             max: 239000,
         },
 
+        plotOptions: {
+            series: {
+                events: {
+                    click: (e) => {
+                        const stateAbbr = e.point.options['hc-key'].substring(3).toUpperCase()
+                        fetchStateDetail(stateAbbr)
+                    }
+                }
+            }
+        },
         series: [
             {
                 name: "States map",
                 dataLabels: {
                     enabled: true,
                     color: "#FFFFFF",
-                    // format: "{series.name}",
-                    style: {
-                        textTransform: "uppercase"
-                    }
+                    formatter: function () {
+                        return formatNum(this.point.value)
+                    },
+
                 },
                 tooltip: {
                     valuePrefix: "$",
+                    headerFormat: "<span>Highest Median Salary</span><br/>",
+                    pointFormat: "<span>{point.jobTitle}: {point.value}</span><br/><span>{point.name}</span>",
                 },
                 cursor: "pointer",
-                data: seriesData
-
+                data: seriesData,
             }
         ]
     }
 
     return (
-        <div>
-            <HighchartsReact
-                highcharts={Highcharts}
-                constructorType={"mapChart"}
-                options={mapOptions}
-            />
-        </div>
+        <>
+            <h1 class="title">RIPL BLS Data</h1>
+            <div className="map-container">
+                <div>
+                    <HighchartsReact
+                        highcharts={Highcharts}
+                        constructorType={"mapChart"}
+                        options={mapOptions}
+                    />
+                </div>
+                <div>
+                    {stateDetail.length > 0 && <Detail stateDetail={stateDetail} />}
+                </div>
+            </div>
+        </>
     )
 }
 
