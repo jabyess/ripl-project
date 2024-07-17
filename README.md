@@ -1,6 +1,6 @@
 # RIPL Project
 
-My idea was to build a way to better visualize the provided BLS salary data. We're able to view the highest paying job in each state, visible on the tooltip. By clicking on a state we can see some detailed salary stats for that state.
+My idea was to build a way to visualize the provided BLS salary data. View the highest paying job in each state by hovering over each one. Click on a state to see detailed salary stats.
 
 ## Pre-requisites
 - `npm` 
@@ -32,3 +32,4 @@ My idea was to build a way to better visualize the provided BLS salary data. We'
 - Clean the data in a more realistic way, so we don't end up with duplicate salaries per job title per state
 - Think about what other data could be shown on map, in detail or overview
 - Add close button for detail view
+- Use schema validation for state_abbr path parameter

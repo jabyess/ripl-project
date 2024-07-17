@@ -86,8 +86,6 @@ df = df.loc[:, cols_to_keep]
 
 cleaned = df.ffill()
 
-# test_df = pd.DataFrame([["VA"], ["NY"], ["MD"]], columns=["state_name"])
-
 with engine.connect() as connection:
     cleaned.to_sql(
         "bls_data",
@@ -96,5 +94,3 @@ with engine.connect() as connection:
         if_exists="replace",
         dtype=bls_dtypes,
     )
-
-    # test_df.to_sql("states", index_label="id", con=connection, if_exists="replace")

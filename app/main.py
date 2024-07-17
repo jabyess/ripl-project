@@ -39,6 +39,6 @@ def states_summary(db: Session = Depends(get_db)):
     return all_data
 
 
-@app.get("/api/state/{state_abbr}")
+@app.get("/api/state/{state_abbr}", response_model=list[schemas.StateDetail])
 def state_detail(state_abbr: str, db: Session = Depends(get_db)):
     return queries.get_state_detail(state_abbr, db)

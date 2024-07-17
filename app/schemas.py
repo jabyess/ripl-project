@@ -52,7 +52,6 @@ class StateAbbr(BaseModel):
 class StateDetail(BaseModel):
     AREA_TITLE: str
     PRIM_STATE: str
-    OCC_CODE: str
     OCC_TITLE: str
     TOT_EMP: int
     EMP_PRSE: float
