@@ -1,6 +1,10 @@
 # RIPL Project
 
-My idea was to build a way to visualize the provided BLS salary data. View the highest paying job in each state by hovering over each one. Click on a state to see detailed salary stats.
+My idea was to build a way to visualize the provided BLS salary data on a 50 state map of the United States. 
+
+You can view the highest paying job in each state by hovering over each one. Click on a state to see detailed salary stats.
+
+The frontend is built using React and Highmaps running on Vite, and the backend is built on FastAPI with and postgresql. I used pandas to clean the data and seed the database.
 
 ## Pre-requisites
 - `npm` 
