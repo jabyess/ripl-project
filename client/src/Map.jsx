@@ -101,7 +101,7 @@ const Map = () => {
 
     return (
         <>
-            <h1 class="title">RIPL BLS Data</h1>
+            <h1 className="title">RIPL BLS Data</h1>
             <div className="map-container">
                 <div>
                     <HighchartsReact
